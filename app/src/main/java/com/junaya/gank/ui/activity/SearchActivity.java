@@ -3,6 +3,7 @@ package com.junaya.gank.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +35,7 @@ public class SearchActivity extends BaseActivity {
 
     private int mPage = 1;
 
-    private String mType ;
+    private String mType;
 
     private String mKeyWords;
 
@@ -121,14 +122,17 @@ public class SearchActivity extends BaseActivity {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listResults -> {
+
                     if (page == 1) {
                         mGanks.clear();
                     }
                     mGanks.addAll(listResults.results);
                     mAdapter.setLoadMore(false);
                     mAdapter.notifyDataSetChanged();
+
                 }, throwable -> {
-                    String s = throwable.getMessage();
+                    Snackbar.make(mBinding.rootView, getString(R.string.error), Snackbar.LENGTH_SHORT)
+                            .show();
                 });
     }
 
