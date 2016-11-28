@@ -7,7 +7,7 @@ import android.widget.TextView;
 import com.junaya.gank.R;
 import com.junaya.gank.base.BaseViewHolder;
 import com.junaya.gank.data.Gank;
-import com.junaya.gank.module.activity.GankDetailActivity;
+import com.junaya.gank.module.activity.WebActivity;
 
 /**
  * Created by aya on 2016/11/27.
@@ -35,7 +35,7 @@ public class PeerTextViewHolder extends BaseViewHolder<Gank> {
             @Override
             public void onClick(View v) {
                 Context context = itemView.getContext();
-                context.startActivity(GankDetailActivity.newIntent(context, gank.url, gank.desc));
+                context.startActivity(WebActivity.newIntent(context, gank.url, gank.desc));
             }
         });
     }

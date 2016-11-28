@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +17,6 @@ import com.junaya.gank.databinding.FragmentGankBinding;
 import com.junaya.gank.listener.GankRecyclerListener;
 import com.junaya.gank.data.Gank;
 import com.junaya.gank.data.remote.GankRetrofit;
-import com.junaya.gank.listener.RItemClickListener;
 import com.junaya.gank.module.adapter.GankAdapter;
 import com.junaya.gank.module.dialog.ImagesBottomSheet;
 import com.junaya.gank.widget.InsertDecoration;
@@ -94,7 +92,6 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     private void iniRecyclerView() {
 
         mGAdapter = new GankAdapter(mGanks);
-        mGAdapter.setRItemClickListener(new GankRItemClickListener());
 
         mBinding.recyclerView.setHasFixedSize(true);
         mBinding.recyclerView.setAdapter(mGAdapter);
@@ -154,18 +151,6 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void showGif(int first, int last) {
-        }
-    }
-
-    private class GankRItemClickListener implements RItemClickListener {
-
-        @Override
-        public void onItemClick(List<String> images) {
-            if (mBottomSheet == null) {
-                mBottomSheet = new ImagesBottomSheet(getActivity());
-            }
-            mBottomSheet.setImages(images);
-            mBottomSheet.onShow();
         }
     }
 

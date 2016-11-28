@@ -24,7 +24,7 @@ import com.junaya.gank.databinding.ActivityDetailBinding;
  * Created by aya on 2016/11/25.
  */
 
-public class GankDetailActivity extends BaseActivity {
+public class WebActivity extends BaseActivity {
 
     private static final String ARG_URL = "gank_url";
     private static final String ARG_TITLE = "gank_title";
@@ -35,7 +35,7 @@ public class GankDetailActivity extends BaseActivity {
 
 
     public static Intent newIntent(Context context, String url, String title) {
-        Intent intent = new Intent(context, GankDetailActivity.class);
+        Intent intent = new Intent(context, WebActivity.class);
         intent.putExtra(ARG_URL, url);
         intent.putExtra(ARG_TITLE, title);
         return intent;

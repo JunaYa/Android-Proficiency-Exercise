@@ -18,6 +18,6 @@ public class BaseFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Thread.setDefaultUncaughtExceptionHandler(new GankExceptionHandler(getActivity()));
+//        Thread.setDefaultUncaughtExceptionHandler(new GankExceptionHandler(getActivity()));
     }
 }

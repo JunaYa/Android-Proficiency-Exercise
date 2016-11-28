@@ -18,13 +18,11 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-
         <activity
             android:name=".module.activity.SearchActivity"
             android:launchMode="singleTop">
         </activity>
-
-        <activity android:name=".module.activity.GankDetailActivity">
+        <activity android:name=".module.activity.WebActivity">
         </activity>
 
         <!--  -->
@@ -35,7 +33,11 @@
             android:name="com.junaya.gank.GankGlideModule"
             android:value="GlideModule"/>
 
-
+        <activity
+            android:name=".module.activity.ImageActivity"
+            android:label="@string/title_activity_image"
+            android:theme="@style/NoActionBar">
+        </activity>
     </application>
 
 </manifest>

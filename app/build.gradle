@@ -76,6 +76,13 @@ dependencies {
 
 //    compile "com.google.android:flexbox:$FlexBoxVersion"
 
+
+    compile 'com.facebook.fresco:fresco:0.14.1'
+    compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
+    // For animated GIF support
+    compile 'com.facebook.fresco:animated-gif:0.14.1'
+
+
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'
     releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'
     testCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5'

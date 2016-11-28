@@ -1,15 +1,23 @@
 package com.junaya.gank.module.adapter;
 
+import android.graphics.drawable.Animatable;
+import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.junaya.gank.listener.RItemClickListener;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.drawee.controller.BaseControllerListener;
+import com.facebook.drawee.controller.ControllerListener;
+import com.facebook.drawee.interfaces.DraweeController;
+import com.facebook.drawee.view.SimpleDraweeView;
+import com.facebook.imagepipeline.image.ImageInfo;
+import com.junaya.gank.data.Gank;
+import com.junaya.gank.module.activity.ImageActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,27 +26,19 @@ import java.util.List;
 
 public class ImagesAdapter extends PagerAdapter {
 
-    private List<String> items = new ArrayList<>();
+    private List<String> items;
+    private Gank mGank;
+    private boolean isGifAnim;
 
-    private RItemClickListener mRItemClickListener;
-
-    public ImagesAdapter(List<String> images) {
+    public ImagesAdapter(Gank gank) {
         super();
-        this.items = images;
-    }
-
-    public void setRItemClickListener(RItemClickListener RItemClickListener) {
-        mRItemClickListener = RItemClickListener;
-    }
-
-    public void setItems(List<String> items) {
-        this.items = items;
-        notifyDataSetChanged();
+        mGank = gank;
+        this.items = gank.images;
     }
 
     @Override
     public int getCount() {
-        final int itemsSize = items == null ? 0 : items.size();
+        final int itemsSize = (items == null ? 0 : items.size());
         return itemsSize > 1 ? itemsSize + 2 : itemsSize;
     }
 
@@ -64,29 +64,71 @@ public class ImagesAdapter extends PagerAdapter {
             pos = position - 1;
         }
 
-        ImageView img = new ImageView(container.getContext());
-        img.setEnabled(true);
-        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
-        ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        img.setLayoutParams(params);
-        img.setOnClickListener(v -> {
 
-            if (mRItemClickListener != null) {
-                mRItemClickListener.onItemClick(items);
+        ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
+            @Override
+            public void onFinalImageSet(
+                    String id,
+                    @Nullable ImageInfo imageInfo,
+                    @Nullable Animatable anim) {
+                if (anim != null) {
+                    anim.start();
+                }
             }
+        };
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(items.get(pos))
+                .setAutoPlayAnimations(true)
+                .setControllerListener(controllerListener)
+                .build();
+
+        LayoutParams sParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+
+        SimpleDraweeView img = new SimpleDraweeView(container.getContext());
+        img.setLayoutParams(sParams);
+        img.setAspectRatio(0.618f);
+        img.setController(controller);
+        img.setOnClickListener(v -> {
+            String[] strings = new String[items.size()];
+            for (int i = 0; i < items.size(); i++) {
+                strings[i] = items.get(i).toString();
+            }
+            container.getContext()
+                .startActivity(ImageActivity.newIntent(container.getContext(), strings, mGank.desc));
+
         });
 
-        // save discharge for gank
-        StringBuilder builder = new StringBuilder();
-        builder.append(items.get(pos));
-        builder.append("?imageView2/0/w/300");
 
-        Glide.with(container.getContext())
-                .load(builder.toString())
-                .asBitmap()
-                .into(img);
+//        ImageView img = new ImageView(container.getContext());
+//        img.setEnabled(true);
+//        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
+//        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+//        img.setLayoutParams(params);
+//        img.setOnClickListener(v -> {
+//            String[] strings = new String[items.size()];
+//            for (int i = 0; i < items.size(); i++) {
+//                strings[i] = items.get(i).toString();
+//            }
+//            container.getContext()
+//                    .startActivity(ImageActivity.newIntent(container.getContext(), strings, mGank.desc));
+//        });
+
+
+
+//        // save discharge for gank
+//        StringBuilder builder = new StringBuilder();
+//        builder.append(items.get(pos));
+//        builder.append("?imageView2/0/w/300");
+//
+//        Glide.with(container.getContext())
+//                .load(builder.toString())
+//                .asBitmap()
+//                .into(img);
         container.addView(img);
         return img;
     }
 
+    public void setGifAnimStart(boolean b) {
+        isGifAnim = b;
+    }
 }

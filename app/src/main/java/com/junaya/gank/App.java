@@ -2,7 +2,12 @@ package com.junaya.gank;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.squareup.leakcanary.LeakCanary;
+
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -16,6 +21,7 @@ public class App extends Application {
         super.onCreate();
         initLeakcanary();
         mApp  = (App) getApplicationContext();
+        initFresco();
     }
 
     private void initLeakcanary(){
@@ -27,7 +33,15 @@ public class App extends Application {
         LeakCanary.install(this);
     }
 
-
+    //初始化 Fresco
+    private void initFresco() {
+        OkHttpClient client = new OkHttpClient.Builder()
+                .build();
+        ImagePipelineConfig config = OkHttpImagePipelineConfigFactory
+                .newBuilder(this, client)
+                .build();
+        Fresco.initialize(this, config);
+    }
     public static App getInstance(){
         return mApp;
     }

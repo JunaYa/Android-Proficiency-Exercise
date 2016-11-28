@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import com.junaya.gank.R;
 import com.junaya.gank.base.BaseViewHolder;
 import com.junaya.gank.data.Gank;
-import com.junaya.gank.listener.RItemClickListener;
 
 import java.util.List;
 
@@ -29,12 +28,6 @@ public class GankAdapter extends RecyclerView.Adapter<BaseViewHolder<Gank>> {
 
     public GankAdapter(List<Gank> ganks) {
         mGanks = ganks;
-    }
-
-    public RItemClickListener mRItemClickListener;
-
-    public void setRItemClickListener(RItemClickListener RItemClickListener) {
-        mRItemClickListener = RItemClickListener;
     }
 
     @Override
@@ -63,12 +56,8 @@ public class GankAdapter extends RecyclerView.Adapter<BaseViewHolder<Gank>> {
         if (getItemViewType(position) == TYPE_LOAD_MORE) return;
         else {
             holder.bindViewHolder(mGanks.get(position));
-            if (getItemViewType(position) == TYPE_TEXT_IMAGE){
-                ((TextImageViewHolder)holder).setRItemClickListener(mRItemClickListener);
-            }
         }
     }
-
 
     @Override
     public int getItemCount() {
