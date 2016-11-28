@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
@@ -130,9 +131,17 @@ public class GankDetailActivity extends BaseActivity {
     }
 
     private class ChromeClient extends WebChromeClient {
+
+
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
+            mBinding.progressbar.setProgress(newProgress);
+            if (newProgress == 100){
+                mBinding.progressbar.setVisibility(View.GONE);
+            }else {
+                mBinding.progressbar.setVisibility(View.VISIBLE);
+            }
         }
 
         @Override
@@ -140,6 +149,8 @@ public class GankDetailActivity extends BaseActivity {
             super.onReceivedTitle(view, title);
             mBinding.tvTitle.setText(title);
         }
+
+
     }
 
 }
