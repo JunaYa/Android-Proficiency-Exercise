@@ -54,8 +54,9 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_gank, container, false);
+        rootView = inflater.inflate(R.layout.fragment_gank, container, false);
         mBinding = DataBindingUtil.bind(rootView);
+
         mBinding.refresh.setColorSchemeResources(R.color.colorPrimary);
         mBinding.refresh.setOnRefreshListener(this);
 
@@ -108,9 +109,7 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(listResults -> {
                     mBinding.refresh.setRefreshing(false);
-                    if (page == 1) {
-                        mGanks.clear();
-                    }
+                    if (page == 1) mGanks.clear();
                     mGanks.addAll(listResults.results);
                     mBinding.refresh.postDelayed(() -> {
                         mGAdapter.setLoadMore(false);
