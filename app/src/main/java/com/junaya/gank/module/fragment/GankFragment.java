@@ -4,6 +4,7 @@ package com.junaya.gank.module.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -123,8 +124,16 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
                         mGAdapter.setLoadMore(false);
                         mGAdapter.notifyDataSetChanged();
                     }, 500);
+
                 }, throwable -> {
                     mBinding.refresh.setRefreshing(false);
+                    if (mPage > 1) return;
+                    Snackbar.make(mBinding.rootView, getString(R.string.error), Snackbar.LENGTH_INDEFINITE)
+                            .setAction(getString(R.string.fetch_again), v -> {
+                                mBinding.refresh.setRefreshing(true);
+                                onRefresh();
+                            }).show();
+
                 });
     }
 
@@ -144,7 +153,7 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         }
 
         @Override
-        public void showGif(int first ,int last) {
+        public void showGif(int first, int last) {
         }
     }
 
@@ -152,7 +161,7 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
         @Override
         public void onItemClick(List<String> images) {
-            if (mBottomSheet == null){
+            if (mBottomSheet == null) {
                 mBottomSheet = new ImagesBottomSheet(getActivity());
             }
             mBottomSheet.setImages(images);
