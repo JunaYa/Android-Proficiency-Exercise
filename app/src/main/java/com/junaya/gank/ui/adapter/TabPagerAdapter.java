@@ -1,11 +1,11 @@
-package com.junaya.gank.module.adapter;
+package com.junaya.gank.ui.adapter;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.text.SpannableString;
 
-import com.junaya.gank.module.fragment.GankFragment;
+import com.junaya.gank.ui.fragment.GankFragment;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.junaya.gank.module.fragment;
+package com.junaya.gank.ui.fragment;
 
 
 import android.databinding.DataBindingUtil;
@@ -17,8 +17,7 @@ import com.junaya.gank.databinding.FragmentGankBinding;
 import com.junaya.gank.listener.GankRecyclerListener;
 import com.junaya.gank.data.Gank;
 import com.junaya.gank.data.remote.GankRetrofit;
-import com.junaya.gank.module.adapter.GankAdapter;
-import com.junaya.gank.module.dialog.ImagesBottomSheet;
+import com.junaya.gank.ui.adapter.GankAdapter;
 import com.junaya.gank.widget.InsertDecoration;
 
 import java.util.ArrayList;
@@ -44,8 +43,6 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
 
     private GankAdapter mGAdapter;
 
-    private ImagesBottomSheet mBottomSheet;
-
     public static GankFragment newFragment(String str) {
         Bundle bundle = new Bundle();
         bundle.putString(GANK_TYPE, str);
@@ -63,8 +60,6 @@ public class GankFragment extends BaseFragment implements SwipeRefreshLayout.OnR
         mBinding.refresh.setOnRefreshListener(this);
 
         mType = getArguments().getString(GANK_TYPE);
-
-        mBottomSheet = new ImagesBottomSheet(getActivity());
 
         iniRecyclerView();
 

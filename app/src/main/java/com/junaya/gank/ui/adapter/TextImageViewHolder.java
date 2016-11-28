@@ -1,4 +1,4 @@
-package com.junaya.gank.module.adapter;
+package com.junaya.gank.ui.adapter;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
@@ -10,7 +10,7 @@ import android.view.View;
 import com.junaya.gank.base.BaseViewHolder;
 import com.junaya.gank.data.Gank;
 import com.junaya.gank.databinding.ItemGankTextImageBinding;
-import com.junaya.gank.module.activity.WebActivity;
+import com.junaya.gank.ui.activity.WebActivity;
 
 /**
  * Created by aya on 2016/11/27.

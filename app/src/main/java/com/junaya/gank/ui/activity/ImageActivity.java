@@ -1,9 +1,8 @@
-package com.junaya.gank.module.activity;
+package com.junaya.gank.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
@@ -14,12 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.Target;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -136,40 +131,26 @@ public class ImageActivity extends BaseActivity {
                 pos = position - 1;
             }
 
-            DraweeController controller = Fresco.newDraweeControllerBuilder()
-                    .setUri(items.get(pos))
-                    .setAutoPlayAnimations(true)
-                    // other setters
-                    .build();
-
-            LayoutParams sParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-
-            SimpleDraweeView img = new SimpleDraweeView(container.getContext());
-            img.setLayoutParams(sParams);
-            img.setAspectRatio(0.618f);
-            img.setController(controller);
-
-//            LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-//            ImageView img = new ImageView(container.getContext());
-//            img.setEnabled(true);
-//            img.setScaleType(ImageView.ScaleType.FIT_CENTER);
-//            img.setLayoutParams(params);
-//
-//            // save discharge for gank
-//            StringBuilder builder = new StringBuilder();
-//            builder.append(items.get(pos));
-//            builder.append("?imageView2/0/w/600");
-//
-//            Glide.with(container.getContext())
-//                    .load(builder.toString())
-//                    .asBitmap()
-////                    .asGif()
-////                    .crossFade()
-//                    .into(img);
+            View img = configFresco(container.getContext(), items.get(pos));
             container.addView(img);
             return img;
         }
     }
 
+    // config SimpleDraweeView load gif
+    private SimpleDraweeView configFresco(Context context, String url) {
+
+        DraweeController controller = Fresco.newDraweeControllerBuilder()
+                .setUri(url)
+                .setAutoPlayAnimations(true)
+                .build();
+
+        LayoutParams sParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        SimpleDraweeView simpleDraweeView = new SimpleDraweeView(context);
+        simpleDraweeView.setLayoutParams(sParams);
+        simpleDraweeView.setAspectRatio(0.618f);
+        simpleDraweeView.setController(controller);
+        return simpleDraweeView;
+    }
 
 }

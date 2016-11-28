@@ -1,4 +1,4 @@
-package com.junaya.gank.module.activity;
+package com.junaya.gank.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +15,7 @@ import com.junaya.gank.databinding.ActivitySearchBinding;
 import com.junaya.gank.listener.GankRecyclerListener;
 import com.junaya.gank.data.Gank;
 import com.junaya.gank.data.remote.GankRetrofit;
-import com.junaya.gank.module.adapter.GankAdapter;
+import com.junaya.gank.ui.adapter.GankAdapter;
 import com.junaya.gank.widget.InsertDecoration;
 
 import java.util.ArrayList;

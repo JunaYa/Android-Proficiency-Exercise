@@ -11,12 +11,14 @@ import com.junaya.gank.GankExceptionHandler;
  */
 
 public class BaseActivity extends AppCompatActivity {
+
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        Thread.setDefaultUncaughtExceptionHandler(new GankExceptionHandler(this));
+        Thread.setDefaultUncaughtExceptionHandler(new GankExceptionHandler(this));
     }
 }

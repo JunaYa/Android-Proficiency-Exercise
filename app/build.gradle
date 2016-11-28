@@ -59,8 +59,7 @@ dependencies {
     compile "com.android.support:design:$rootProject.supportVersion"
     compile "com.android.support:recyclerview-v7:$rootProject.supportVersion"
 
-    compile "com.google.dagger:dagger:$rootProject.Dagger2Version"
-    apt "com.google.dagger:dagger-compiler:$rootProject.Dagger2Version"
+
     compile "com.squareup.retrofit2:retrofit:$rootProject.RetrofitVersion"
     compile "com.squareup.retrofit2:adapter-rxjava:$rootProject.RetrofitVersion"
     compile "com.squareup.retrofit2:converter-gson:$rootProject.RetrofitVersion"
@@ -69,18 +68,16 @@ dependencies {
     //rx dependencies
     compile "io.reactivex:rxandroid:$rootProject.RxAndroidVersion"
     compile "io.reactivex:rxjava:$rootProject.RxJavaVersion"
-    compile "com.github.bumptech.glide:glide:$rootProject.GlideVersion"
-    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
-
     compile 'com.daimajia.numberprogressbar:library:1.2@aar'
+    compile "com.facebook.fresco:fresco:$rootProject.FrescoVersion"
+    compile "com.facebook.fresco:imagepipeline-okhttp3:$rootProject.FrescoOKHttp3Version"
+    compile "com.facebook.fresco:animated-gif:$rootProject.FrescoGifVersion"
 
+//    compile "com.google.dagger:dagger:$rootProject.Dagger2Version"
+//    apt "com.google.dagger:dagger-compiler:$rootProject.Dagger2Version"
+//    compile "com.github.bumptech.glide:glide:$rootProject.GlideVersion"
+//    compile 'com.github.bumptech.glide:okhttp3-integration:1.4.0@aar'
 //    compile "com.google.android:flexbox:$FlexBoxVersion"
-
-
-    compile 'com.facebook.fresco:fresco:0.14.1'
-    compile "com.facebook.fresco:imagepipeline-okhttp3:0.12.0+"
-    // For animated GIF support
-    compile 'com.facebook.fresco:animated-gif:0.14.1'
 
 
     debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5'

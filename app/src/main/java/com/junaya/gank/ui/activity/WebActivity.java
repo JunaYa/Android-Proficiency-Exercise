@@ -1,4 +1,4 @@
-package com.junaya.gank.module.activity;
+package com.junaya.gank.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.junaya.gank.R;
 import com.junaya.gank.base.BaseActivity;
-import com.junaya.gank.databinding.ActivityDetailBinding;
+import com.junaya.gank.databinding.ActivityWebBinding;
 
 /**
  * Created by aya on 2016/11/25.
@@ -29,7 +29,7 @@ public class WebActivity extends BaseActivity {
     private static final String ARG_URL = "gank_url";
     private static final String ARG_TITLE = "gank_title";
 
-    private ActivityDetailBinding mBinding;
+    private ActivityWebBinding mBinding;
 
     private String mUrl, mTitle;
 
@@ -45,7 +45,7 @@ public class WebActivity extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        mBinding = DataBindingUtil.setContentView(this, R.layout.activity_web);
 
         mUrl = getIntent().getStringExtra(ARG_URL);
         mTitle = getIntent().getStringExtra(ARG_TITLE);

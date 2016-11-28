@@ -42,6 +42,9 @@ ext {
     Dagger2Version = '2.5'
     FlexBoxVersion = '0.2.3'
     GlideVersion = '3.7.0'
+    FrescoVersion = '0.14.1'
+    FrescoOKHttp3Version = '0.12.0+'
+    FrescoGifVersion ='0.14.1'
 
 
 }

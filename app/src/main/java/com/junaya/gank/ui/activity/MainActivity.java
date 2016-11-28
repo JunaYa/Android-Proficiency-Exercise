@@ -1,17 +1,14 @@
-package com.junaya.gank.module.activity;
+package com.junaya.gank.ui.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.junaya.gank.R;
 import com.junaya.gank.base.BaseActivity;
 import com.junaya.gank.databinding.ActivityMainBinding;
-import com.junaya.gank.module.adapter.TabPagerAdapter;
-import com.junaya.gank.module.fragment.GankFragment;
+import com.junaya.gank.ui.adapter.TabPagerAdapter;
 
 
 public class MainActivity extends BaseActivity {

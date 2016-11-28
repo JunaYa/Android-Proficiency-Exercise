@@ -1,14 +1,13 @@
-package com.junaya.gank.module.adapter;
+package com.junaya.gank.ui.adapter;
 
+import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
@@ -16,7 +15,7 @@ import com.facebook.drawee.interfaces.DraweeController;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.imagepipeline.image.ImageInfo;
 import com.junaya.gank.data.Gank;
-import com.junaya.gank.module.activity.ImageActivity;
+import com.junaya.gank.ui.activity.ImageActivity;
 
 import java.util.List;
 
@@ -64,7 +63,17 @@ public class ImagesAdapter extends PagerAdapter {
             pos = position - 1;
         }
 
+        String[] strings = new String[items.size()];
+        for (int i = 0; i < items.size(); i++) {
+            strings[i] = items.get(i).toString();
+        }
+        View img = configFresco(container.getContext(),items.get(pos),strings,mGank.desc);
+        container.addView(img);
+        return img;
+    }
 
+    // config SimpleDraweeView load gif
+    private SimpleDraweeView configFresco(final Context context, final String url, final String[] urlArr, final String desc) {
         ControllerListener controllerListener = new BaseControllerListener<ImageInfo>() {
             @Override
             public void onFinalImageSet(
@@ -76,55 +85,28 @@ public class ImagesAdapter extends PagerAdapter {
                 }
             }
         };
+
+        StringBuilder urlBuilder = new StringBuilder();
+        urlBuilder.append(url);
+        urlBuilder.append("?imageView2/0/w/300");
+
         DraweeController controller = Fresco.newDraweeControllerBuilder()
-                .setUri(items.get(pos))
+                .setUri(urlBuilder.toString())
                 .setAutoPlayAnimations(true)
                 .setControllerListener(controllerListener)
                 .build();
 
         LayoutParams sParams = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 
-        SimpleDraweeView img = new SimpleDraweeView(container.getContext());
+        SimpleDraweeView img = new SimpleDraweeView(context);
         img.setLayoutParams(sParams);
         img.setAspectRatio(0.618f);
         img.setController(controller);
         img.setOnClickListener(v -> {
-            String[] strings = new String[items.size()];
-            for (int i = 0; i < items.size(); i++) {
-                strings[i] = items.get(i).toString();
-            }
-            container.getContext()
-                .startActivity(ImageActivity.newIntent(container.getContext(), strings, mGank.desc));
+
+            context.startActivity(ImageActivity.newIntent(context, urlArr, desc));
 
         });
-
-
-//        ImageView img = new ImageView(container.getContext());
-//        img.setEnabled(true);
-//        img.setScaleType(ImageView.ScaleType.FIT_CENTER);
-//        LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-//        img.setLayoutParams(params);
-//        img.setOnClickListener(v -> {
-//            String[] strings = new String[items.size()];
-//            for (int i = 0; i < items.size(); i++) {
-//                strings[i] = items.get(i).toString();
-//            }
-//            container.getContext()
-//                    .startActivity(ImageActivity.newIntent(container.getContext(), strings, mGank.desc));
-//        });
-
-
-
-//        // save discharge for gank
-//        StringBuilder builder = new StringBuilder();
-//        builder.append(items.get(pos));
-//        builder.append("?imageView2/0/w/300");
-//
-//        Glide.with(container.getContext())
-//                .load(builder.toString())
-//                .asBitmap()
-//                .into(img);
-        container.addView(img);
         return img;
     }
 

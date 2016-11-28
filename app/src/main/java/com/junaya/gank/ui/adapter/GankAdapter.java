@@ -1,4 +1,4 @@
-package com.junaya.gank.module.adapter;
+package com.junaya.gank.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
