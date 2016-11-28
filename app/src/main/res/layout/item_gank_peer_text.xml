@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_16"
+        >
+
+        <TextView
+            android:id="@+id/desc"
+            style="@style/tv_style_mid_black"
+            android:layout_marginBottom="@dimen/margin_16"
+            tools:text="desc"
+            />
+
+        <TextView
+            android:id="@+id/who"
+            style="@style/tv_style_min_gray"
+            android:layout_below="@id/desc"
+            tools:text="who"
+            />
+
+        <TextView
+            android:id="@+id/publishAt"
+            style="@style/tv_style_min_gray"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/desc"
+            tools:text="2016-11-25"
+            />
+    </RelativeLayout>
+</layout>

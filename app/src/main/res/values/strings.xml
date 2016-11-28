@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Gank.io</string>
+    <string name="load_more">加载更多...</string>
+    <string name="title_activity_test">TestActivity</string>
+</resources>

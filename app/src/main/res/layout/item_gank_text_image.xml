@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="188dp"
+        >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="188dp"
+            android:clickable="true"
+            />
+
+        <RelativeLayout
+            android:id="@+id/item_rl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/bg_transparent"
+            android:padding="@dimen/padding_16"
+            >
+
+            <TextView
+                android:id="@+id/desc"
+                style="@style/tv_style_mid_white"
+                android:layout_marginBottom="@dimen/margin_8"
+                android:ellipsize="end"
+                android:singleLine="true"
+                tools:text="desc"
+                />
+
+            <TextView
+                android:id="@+id/who"
+                style="@style/tv_style_min_white"
+                android:layout_below="@id/desc"
+                tools:text="who"
+                />
+
+            <TextView
+                android:id="@+id/publishAt"
+                style="@style/tv_style_min_white"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/desc"
+                tools:text="2016-11-25"
+                />
+
+        </RelativeLayout>
+
+        <com.junaya.gank.widget.CirclePageIndicator
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            app:fillColor="@color/white"
+            app:pageColor="@color/tab_white_70"
+            app:radius="2dp"
+            />
+
+    </RelativeLayout>
+
+</layout>
