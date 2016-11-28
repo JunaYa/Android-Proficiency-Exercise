@@ -4,4 +4,6 @@
     <string name="error">获取数据失败</string>
     <string name="fetch_again">重新获取</string>
     <string name="title_activity_image">ImageActivity</string>
+    <string name="share">translatable="false">「%1$s%2$1s (分享自 @Gank.io)</string>
+    <string name="action_share">action_share</string>
 </resources>

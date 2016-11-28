@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
@@ -32,6 +33,8 @@ public class WebActivity extends BaseActivity {
     private ActivityWebBinding mBinding;
 
     private String mUrl, mTitle;
+
+    private boolean isShare;
 
 
     public static Intent newIntent(Context context, String url, String title) {
@@ -78,7 +81,6 @@ public class WebActivity extends BaseActivity {
         if (mBinding.webView != null) mBinding.webView.onPause();
     }
 
-
     @Override
     protected void onDestroy() {
         super.onStop();
@@ -86,9 +88,25 @@ public class WebActivity extends BaseActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.share_menu, menu);
+        return true;
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
             finish();
+        }
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.item_share:
+                if (isShare) {
+                    share();
+                }
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -130,6 +148,14 @@ public class WebActivity extends BaseActivity {
         mBinding.tvTitle.setText(mTitle);
     }
 
+    private void share() {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share, mTitle, mUrl));
+        intent.setType("text/plain");
+        startActivity(Intent.createChooser(intent, getString(R.string.action_share)));
+    }
+
+
     private class ChromeClient extends WebChromeClient {
 
 
@@ -137,9 +163,11 @@ public class WebActivity extends BaseActivity {
         public void onProgressChanged(WebView view, int newProgress) {
             super.onProgressChanged(view, newProgress);
             mBinding.progressbar.setProgress(newProgress);
-            if (newProgress == 100){
+            if (newProgress == 100) {
+                isShare = true;
                 mBinding.progressbar.setVisibility(View.GONE);
-            }else {
+            } else {
+                isShare = false;
                 mBinding.progressbar.setVisibility(View.VISIBLE);
             }
         }
